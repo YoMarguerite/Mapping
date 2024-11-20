@@ -3,12 +3,12 @@ import { useTemplateRef, onMounted } from 'vue'
 import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos'
 import Hydra from 'hydra-synth';
-
-import HipHop from '../components/HipHop.vue';
-import Hyperhumancow from '../components/Hyperhumancow.vue';
+import Text from '../components/Text.vue';
 
 const input = useTemplateRef('hydra')
 const canvas = useTemplateRef('canvas')
+
+
 
 onMounted(() => {
   console.log(canvas)
@@ -16,36 +16,36 @@ onMounted(() => {
 
   var hydra = new Hydra({canvas: input.value, detectAudio:false, makeGlobal: true}).synth
 
-  osc(40,0.2,8)
-          .modulateScale(osc(80,0,1).kaleid(100))
-          .repeat(2,4)
-          .modulate(o0,0.05)
-          .modulateKaleid(shape(4,0.1,1))
-          .out(o0)
+  // osc(40,0.2,8)
+  //         .modulateScale(osc(80,0,1).kaleid(100))
+  //         .repeat(2,4)
+  //         .modulate(o0,0.05)
+  //         .modulateKaleid(shape(4,0.1,1))
+  //         .out(o0)
         
-  osc(60,-0.015,0.3).diff(osc(60,0.08).rotate(Math.PI/2))
-            .modulateScale(noise(3.5,0.25).modulateScale(osc(15).rotate(()=>Math.sin(time/2))),0.6)
-            .color(1,0.5,0.4).contrast(1.4)
-            .add(src(o1).modulate(o1,.04),.6)
-            .invert().brightness(0.1).contrast(1.2)
-            .modulateScale(osc(2),-0.2)
-            .out(o1)
+  // osc(60,-0.015,0.3).diff(osc(60,0.08).rotate(Math.PI/2))
+  //           .modulateScale(noise(3.5,0.25).modulateScale(osc(15).rotate(()=>Math.sin(time/2))),0.6)
+  //           .color(1,0.5,0.4).contrast(1.4)
+  //           .add(src(o1).modulate(o1,.04),.6)
+  //           .invert().brightness(0.1).contrast(1.2)
+  //           .modulateScale(osc(2),-0.2)
+  //           .out(o1)
 
-  osc(20, 0.01, 1.1)
-          .kaleid(5)
-          .color(2.83,0.91,0.39)
-          .rotate(0, 0.1)
-          .modulate(o2, () => mouse.x * 0.0003)
-          .scale(1.01)
-          .out(o2)
+  // osc(20, 0.01, 1.1)
+  //         .kaleid(5)
+  //         .color(2.83,0.91,0.39)
+  //         .rotate(0, 0.1)
+  //         .modulate(o2, () => mouse.x * 0.0003)
+  //         .scale(1.01)
+  //         .out(o2)
 
-  osc(100, 0.01, 1.4)
-          .rotate(0, 0.1)
-          .mult(osc(10, 0.1).modulate(osc(10).rotate(0, -0.1), 1))
-          .color(2.83,0.91,0.39)
-          .out(o3)
+  // osc(100, 0.01, 1.4)
+  //         .rotate(0, 0.1)
+  //         .mult(osc(10, 0.1).modulate(osc(10).rotate(0, -0.1), 1))
+  //         .color(2.83,0.91,0.39)
+  //         .out(o3)
           
-        render()
+       
 
   //       voronoi(350,0.15)
   // 	.modulateScale(osc(8).rotate(Math.sin(time)),.5)
@@ -58,7 +58,7 @@ onMounted(() => {
 	// .brightness([-.02,-.17].smooth().fast(.5))
 	// .out()
 
-  // osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out(o0)
+  hydra.osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out()
 
 //   shape([4,5,6].fast(0.1).smooth(1),0.000001,[0.2,0.7].smooth(1))
 // .color(0.2,0.4,0.3)
@@ -113,33 +113,26 @@ onMounted(() => {
 //   .rotate(()=>time)
 //   .out()
 
+// render()
+
 })
 
 
 </script>
 
 <template>
-  <canvas id="hydra" ref="hydra"></canvas>
-  <TresCanvas ref="canvas"  id="canvas">
-    <TresPerspectiveCamera
-      :position="[3, 3, 3]"
-      :fov="45"
-      :look-at="[0, 0, 0]"
-    />
-    <OrbitControls />
-    <Suspense>
-      <!-- <HipHop></HipHop> -->
-      <Hyperhumancow></Hyperhumancow>    
-    </Suspense>
-    
-    <!-- 
-    <TresMesh>
-      <TresTorusGeometry :args="[1, 0.5, 16, 32]" />
-      <TresMeshBasicMaterial color="orange" />
-    </TresMesh>
-    -->
-    <TresAmbientLight :intensity="1" />
-  </TresCanvas>
+  <div>
+    <canvas id="hydra" ref="hydra"></canvas>
+    <TresCanvas ref="canvas"  id="canvas" 
+      shadows
+      alpha>
+      <TresPerspectiveCamera :position="[1, -1, 1]" />
+      <OrbitControls />
+      <Suspense>
+        <Text></Text>      
+      </Suspense>
+    </TresCanvas>
+  </div>  
 </template>
 
 <style>
@@ -151,8 +144,8 @@ body {
   width: 100%;
 }
 #canvas {
-  height: 600px !important;
-  width: 1000px !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 #hydra{
   position:absolute;
