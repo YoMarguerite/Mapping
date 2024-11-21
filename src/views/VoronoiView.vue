@@ -14,7 +14,7 @@ onMounted(() => {
   console.log(canvas)
   input.value
 
-  var hydra = new Hydra({canvas: input.value, detectAudio:false, makeGlobal: true}).synth
+  var hydra = new Hydra({canvas: input.value, detectAudio:true, makeGlobal: true}).synth
 
   // osc(40,0.2,8)
   //         .modulateScale(osc(80,0,1).kaleid(100))
@@ -47,18 +47,18 @@ onMounted(() => {
           
        
 
-  //       voronoi(350,0.15)
-  // 	.modulateScale(osc(8).rotate(Math.sin(time)),.5)
-  // 	.thresh(.8)
-	// .modulateRotate(osc(7),.4)
-	// .thresh(.7)
-  // 	.diff(src(o0).scale(1.8))
-	// .modulateScale(osc(2).modulateRotate(o0,.74))
-	// .diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
-	// .brightness([-.02,-.17].smooth().fast(.5))
-	// .out()
+  voronoi(350,0.15)
+  	.modulateScale(osc(8).rotate(Math.sin(time)),.5)
+  	.thresh(.8)
+	.modulateRotate(osc(7),.4)
+	.thresh(.7)
+  	.diff(src(o0).scale(1.8))
+	.modulateScale(osc(2).modulateRotate(o0,.74))
+	.diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
+	.brightness([-.02,-.17].smooth().fast(.5))
+	.out()
 
-  hydra.osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out()
+  //osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out()
 
 //   shape([4,5,6].fast(0.1).smooth(1),0.000001,[0.2,0.7].smooth(1))
 // .color(0.2,0.4,0.3)
@@ -128,25 +128,26 @@ onMounted(() => {
       alpha>
       <TresPerspectiveCamera :position="[1, -1, 1]" />
       <OrbitControls />
-      <Suspense>
+      <!-- <Suspense>
         <Text></Text>      
-      </Suspense>
+      </Suspense> -->
     </TresCanvas>
   </div>  
 </template>
 
 <style>
-html,
-body {
+div{
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
 }
+
 #canvas {
-  height: 100% !important;
-  width: 100% !important;
+  height: 100vh !important;
+  width: 100vw !important;
 }
+
 #hydra{
   position:absolute;
   top:0;

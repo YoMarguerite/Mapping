@@ -1,21 +1,29 @@
 <script setup>
 </script>
 <template>
-  <div>
-    <h1>Hello App!</h1>
-    <p>
-      <strong>Current route path:</strong> {{ $route.fullPath }}
-    </p>
-    <nav>
-      <RouterLink to="/">Go to Home</RouterLink>
-      <RouterLink to="/thres">Go to Thres</RouterLink>
-      <RouterLink to="/text">Go to Text</RouterLink>
-
-    </nav>
-    <main>
+    <v-app>
       <RouterView />
-    </main>
-  </div>
-  
+    </v-app>  
 </template>
 
+<style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+#app{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+main{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+</style>

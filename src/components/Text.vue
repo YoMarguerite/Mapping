@@ -14,6 +14,6 @@
         font="./Bangers_Regular.json"
         text="RABABOOM"
         center>
-        <TresMeshMatcapMaterial :matcap="matcapTexture" />
+        <TresMeshMatcapMaterial :matcap="matcapTexture" color="#4287f5"/>
     </Text3D>
 </template>
