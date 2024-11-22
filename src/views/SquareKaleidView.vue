@@ -8,10 +8,35 @@ import Text from '../components/Text.vue';
 const input = useTemplateRef('hydra')
 const canvas = useTemplateRef('canvas')
 
+import { useStore } from 'vuex'
+import { ref, watch } from 'vue'
 
+const store = useStore()
+
+var color = ref(store._state.data.color)
+var text = ref(store._state.data.text)
+
+window.abc = function(newColor, newText){
+  console.log(newColor)
+  console.log(newText)
+  store.commit("changeText", {
+    color: newColor._value, 
+    text: newText._value})
+
+    console.log(color)
+    console.log(text)
+  
+}
+
+watch(color, (newColor) => {
+  color = newColor
+})
+
+watch(text, (newText) => {
+  text = newText
+})
 
 onMounted(() => {
-  console.log(canvas)
   input.value
 
   var hydra = new Hydra({canvas: input.value, detectAudio:true, makeGlobal: true}).synth
@@ -58,7 +83,7 @@ onMounted(() => {
 	// .brightness([-.02,-.17].smooth().fast(.5))
 	// .out()
 
-  osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out()
+  hydra.osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out()
 
 //   shape([4,5,6].fast(0.1).smooth(1),0.000001,[0.2,0.7].smooth(1))
 // .color(0.2,0.4,0.3)
@@ -128,9 +153,9 @@ onMounted(() => {
       alpha>
       <TresPerspectiveCamera :position="[1, -1, 1]" />
       <OrbitControls />
-      <!-- <Suspense>
-        <Text></Text>      
-      </Suspense> -->
+      <Suspense>
+        <Text :color="color" :text="text"></Text>      
+      </Suspense>
     </TresCanvas>
   </div>  
 </template>

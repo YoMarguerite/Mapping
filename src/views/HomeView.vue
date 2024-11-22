@@ -5,9 +5,10 @@ import HomeCard from '../components/HomeCard.vue'
 
 const store=useStore()
 
+
 var cards = [
   {
-    title: "oui",
+    title: "Square Kaleid",
     link: "squarekaleid",
     img: "./squarekaleid.png"
   },
@@ -17,14 +18,15 @@ console.log(store)
 var color = ref(store._state.data.color)
 var text = ref(store._state.data.text)
 
-watch(color, (newColor) => {
-  store._state.data.color = newColor
-})
+var tabs = []
 
-watch(text, (newText) => {
-  store._state.data.text = newText
-})
-
+var commit = function(){
+  tabs.forEach((tab) => {
+    console.log(color)
+    console.log(text)
+    tab.abc(color, text)
+  })
+}
 
 </script>
 
@@ -42,31 +44,31 @@ watch(text, (newText) => {
       Tout est modifiable suffit de me demander !
     </p>
     <br>
+
     <v-form>
-      <v-row>
-        <v-col>
+      <v-row justify="center" >
+        <v-col cols="3" class="d-flex flex-column">
           <v-text-field v-model="text" label="Texte à afficher"></v-text-field>
-        </v-col>
-        <v-col>
           <v-row justify="center">
-            <v-col cols="5">Couleur du texte :</v-col>
-            <v-col cols="5"><ColorPicker v-model="color" format="hex"/></v-col>
+            <v-col cols="3">{{ color }}</v-col>
+            <v-col cols="1"></v-col>
+            <v-col cols="3"><ColorPicker v-model="color" format="hex"/></v-col>
           </v-row>
-        </v-col>
+          <br>
+          <Button label="OK" @click="commit()"></Button>
+        </v-col>        
       </v-row>      
     </v-form>
 
     <nav>
-      <!-- <RouterLink to="/thres" target="_blank">Go to Thres</RouterLink>
-      <RouterLink to="/text" target="_blank">Go to Text</RouterLink> -->
-
-      <RouterLink to="/thres">Go to Thres</RouterLink>
-      <RouterLink to="/squarekaleid">Go to Text</RouterLink>
 
       <HomeCard v-for="card in cards" 
         :title="card.title" 
         :link="card.link"
-        :img="card.img">
+        :img="card.img"
+        @addTab="(tab) => {
+          tabs.push(tab)
+        }">
       </HomeCard>
 
       <!-- <v-row>

@@ -7,5 +7,11 @@ export default createStore({
       text: 'RABABOOM'
     }
   },
-  
+  mutations: {
+    changeText(state, {color, text}) {
+      state.color = color;
+      state.text = text;
+      console.log(state)
+    }
+  },
 })
