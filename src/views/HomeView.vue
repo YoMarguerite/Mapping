@@ -1,6 +1,9 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, watch, ref } from 'vue'
+import { useStore } from 'vuex'
 import HomeCard from '../components/HomeCard.vue'
+
+const store=useStore()
 
 var cards = [
   {
@@ -9,27 +12,26 @@ var cards = [
     img: "./squarekaleid.png"
   },
 ] 
+console.log(store)
 
-var color = '#4287f5'
-var	menu = false
+var color = ref(store._state.data.color)
+var text = ref(store._state.data.text)
 
-
-const swatchStyle = computed(() => {
-  return {
-    backgroundColor: color,
-    cursor: 'pointer',
-    height: '30px',
-    width: '30px',
-    borderRadius: menu ? '50%' : '4px',
-    transition: 'border-radius 200ms ease-in-out'
-  }
+watch(color, (newColor) => {
+  store._state.data.color = newColor
 })
+
+watch(text, (newText) => {
+  store._state.data.text = newText
+})
+
 
 </script>
 
 <template>
-  <div class="d-flex justify-center text-center flex-column">
+  <div class="d-flex justify-center text-center flex-column pa-10">
     <h1>Hello les potos de RABABOOM !</h1>
+    <br>
     <p>
       Voici une proposition de mapping à projeter
     </p>
@@ -39,36 +41,21 @@ const swatchStyle = computed(() => {
     <p>
       Tout est modifiable suffit de me demander !
     </p>
-    <v-row justify="center" align="center">
-			<v-col class="shrink" style="min-width: 220px;">
-				<v-menu offset-y>
-          <template v-slot:activator="{ props }">
-            <v-btn
-              :color="color"
-              dark
-              v-bind="props"
-            >
-              {{ color }}
-            </v-btn>
-          </template>
-          <v-color-picker
-            v-model="color"
-            hide-canvas 
-            hide-inputs 
-            class="mx-auto"
-          ></v-color-picker>
-        </v-menu>
-			</v-col>
-		</v-row>
-    <!-- <v-color-picker :modes="['hexa']"></v-color-picker>
-    <v-row>
-      <v-col>
-        <v-text-field label="Texte à afficher"></v-text-field>
-      </v-col>
-      <v-col>
-        
-      </v-col>
-    </v-row> -->
+    <br>
+    <v-form>
+      <v-row>
+        <v-col>
+          <v-text-field v-model="text" label="Texte à afficher"></v-text-field>
+        </v-col>
+        <v-col>
+          <v-row justify="center">
+            <v-col cols="5">Couleur du texte :</v-col>
+            <v-col cols="5"><ColorPicker v-model="color" format="hex"/></v-col>
+          </v-row>
+        </v-col>
+      </v-row>      
+    </v-form>
+
     <nav>
       <!-- <RouterLink to="/thres" target="_blank">Go to Thres</RouterLink>
       <RouterLink to="/text" target="_blank">Go to Text</RouterLink> -->

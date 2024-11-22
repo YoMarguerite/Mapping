@@ -19,7 +19,7 @@ const props = defineProps({
         :src="img"
         cover
       >
-        <v-card-title>{{ title }}</v-card-title>
+        
       </v-img>
   
       <!-- <v-card-subtitle class="pt-4">
@@ -33,7 +33,8 @@ const props = defineProps({
       </v-card-text> -->
   
       <v-card-actions>
-        <v-btn color="orange" text="Share"></v-btn>
+        <v-card-title>{{ title }}</v-card-title>
+        <v-btn color="orange" text="Share">OUI</v-btn>
   
         <v-btn color="orange" text="Explore"></v-btn>
       </v-card-actions>

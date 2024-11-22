@@ -1,7 +1,11 @@
 import { createStore } from 'vuex'
 
 export default createStore({
-  state: {
-    message: 'Hello World'
-  }
+  state () {
+    return {
+      color: '#4287f5',
+      text: 'RABABOOM'
+    }
+  },
+  
 })
