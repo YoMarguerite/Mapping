@@ -13,7 +13,6 @@ const props = defineProps({
 var redirect = function(name){
   const routeData = router.resolve({name: name});
   var tab = window.open(routeData.href, '_blank')
-  emit('addTab', tab)
 }
 
 </script>

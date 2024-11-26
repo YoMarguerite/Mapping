@@ -1,10 +1,7 @@
 <script setup>
 import { computed, watch, ref } from 'vue'
-import { useStore } from 'vuex'
 import HomeCard from '../components/HomeCard.vue'
-
-const store=useStore()
-
+import manualStore from '../store/manualStore'
 
 var cards = [
   {
@@ -12,21 +9,30 @@ var cards = [
     link: "squarekaleid",
     img: "./squarekaleid.png"
   },
+  {
+    title: "Voronoi",
+    link: "voronoi",
+    img: "./voronoi.png"
+  },
+  {
+    title: "Color",
+    link: "color",
+    img: "./voronoi.png"
+  },
+  {
+    title: "Saturate",
+    link: "saturate",
+    img: "./voronoi.png"
+  },
 ] 
-console.log(store)
 
-var color = ref(store._state.data.color)
-var text = ref(store._state.data.text)
+var color = ""
+var text = ""
 
-var tabs = []
+let storeValue = manualStore.getStore()
+color = ref(storeValue.colorMapping)
+text = ref(storeValue.textMapping)
 
-var commit = function(){
-  tabs.forEach((tab) => {
-    console.log(color)
-    console.log(text)
-    tab.abc(color, text)
-  })
-}
 
 </script>
 
@@ -52,50 +58,27 @@ var commit = function(){
           <v-row justify="center">
             <v-col cols="3">{{ color }}</v-col>
             <v-col cols="1"></v-col>
-            <v-col cols="3"><ColorPicker v-model="color" format="hex"/></v-col>
+            <v-col cols="3"><ColorPicker v-model="color"/></v-col>
           </v-row>
           <br>
-          <Button label="OK" @click="commit()"></Button>
+          <Button label="OK" @click="manualStore.setStore(color, text)"></Button>
         </v-col>        
       </v-row>      
     </v-form>
 
     <nav>
 
-      <HomeCard v-for="card in cards" 
-        :title="card.title" 
-        :link="card.link"
-        :img="card.img"
-        @addTab="(tab) => {
-          tabs.push(tab)
-        }">
-      </HomeCard>
-
-      <!-- <v-row>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>        
-      </v-row>
-
       <v-row>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>        
+        <v-col cols="4" v-for="card in cards">
+          <HomeCard  
+            :title="card.title" 
+            :link="card.link"
+            :img="card.img"
+            >
+          </HomeCard>
+        </v-col>
       </v-row>
-
-      <v-row>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>        
-      </v-row>
-
-      <v-row>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>
-        <v-col><HomeCard></HomeCard></v-col>        
-      </v-row> -->
-
-
+    
     </nav>
   </div>
 </template>

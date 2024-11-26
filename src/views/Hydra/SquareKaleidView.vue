@@ -3,15 +3,13 @@ import { useTemplateRef, onMounted } from 'vue'
 import { TresCanvas } from '@tresjs/core';
 import { OrbitControls } from '@tresjs/cientos'
 import Hydra from 'hydra-synth';
-import Text from '../components/Text.vue';
+import Text from '../../components/Text.vue';
 
 const input = useTemplateRef('hydra')
 const canvas = useTemplateRef('canvas')
 
 
-
 onMounted(() => {
-  console.log(canvas)
   input.value
 
   var hydra = new Hydra({canvas: input.value, detectAudio:true, makeGlobal: true}).synth
@@ -39,26 +37,10 @@ onMounted(() => {
   //         .scale(1.01)
   //         .out(o2)
 
-  // osc(100, 0.01, 1.4)
-  //         .rotate(0, 0.1)
-  //         .mult(osc(10, 0.1).modulate(osc(10).rotate(0, -0.1), 1))
-  //         .color(2.83,0.91,0.39)
-  //         .out(o3)
+  
           
-       
 
-  voronoi(350,0.15)
-  	.modulateScale(osc(8).rotate(Math.sin(time)),.5)
-  	.thresh(.8)
-	.modulateRotate(osc(7),.4)
-	.thresh(.7)
-  	.diff(src(o0).scale(1.8))
-	.modulateScale(osc(2).modulateRotate(o0,.74))
-	.diff(src(o0).rotate([-.012,.01,-.002,0]).scrollY(0,[-1/199800,0].fast(0.7)))
-	.brightness([-.02,-.17].smooth().fast(.5))
-	.out()
-
-  //osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out()
+  hydra.osc(20, 0.03, 1.7).kaleid().mult(osc(20, 0.001, 0).rotate(1.58)).blend(o0, 0.94).modulateScale(osc(10, 0),-0.03).scale(0.8, () => (1.05 + 0.1 * Math.sin(0.05*time))).out()
 
 //   shape([4,5,6].fast(0.1).smooth(1),0.000001,[0.2,0.7].smooth(1))
 // .color(0.2,0.4,0.3)
@@ -82,16 +64,7 @@ onMounted(() => {
 // .out()
 
 
-// osc(3, 0.01, 0.4)
-// .color(1.2,1.2,1.3)
-// .saturate(0.4)
-// .modulateRepeat(osc(2),1, 2, 4, 3)
-// .modulateKaleid(osc(12,0.05,0),1)
-// .luma (0.4)
-// .rotate(4, 0.1,0)
-// .modulate(o0, () => mouse.y *0.0002 )
-// .scale(1).diff(o1)
-// .out(o0)
+
 
 // voronoi(2,0.3,0.2).shift(0.5)
 // .modulatePixelate(voronoi(4,0.2),32,2)
@@ -117,7 +90,6 @@ onMounted(() => {
 
 })
 
-
 </script>
 
 <template>
@@ -128,9 +100,9 @@ onMounted(() => {
       alpha>
       <TresPerspectiveCamera :position="[1, -1, 1]" />
       <OrbitControls />
-      <!-- <Suspense>
+      <Suspense>
         <Text></Text>      
-      </Suspense> -->
+      </Suspense>
     </TresCanvas>
   </div>  
 </template>
