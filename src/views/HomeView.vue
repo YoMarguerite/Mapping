@@ -54,7 +54,7 @@ text = ref(storeValue.textMapping)
         <HomeCard  
           :title="card.title" 
           :link="card.name"
-          :img="card.name + '.png'"
+          :img="'hydra/' + card.name + '.png'"
           >
         </HomeCard>
       </v-col>
@@ -62,3 +62,9 @@ text = ref(storeValue.textMapping)
 
   </div>
 </template>
+
+<style>
+/* div{
+  background-color: white;
+} */
+</style>
