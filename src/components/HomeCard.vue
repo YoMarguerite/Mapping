@@ -18,26 +18,33 @@ var redirect = function(name){
 </script>
 
 <template>
-    <Card style="width: 25rem; overflow: hidden">
+    <Card style="height:300px;">
       <template #header>
           <v-img
             class="align-end text-white"
-            height="200"
             :src="img"
             cover
+            height="200px"
           >            
           </v-img>
       </template>
-      <template #title>{{ title }}</template>
-      <template #footer>
-        <Button as="router-link" :to="{name: link}" >
+      <template #content>
+        <v-row  align="center">
+          <v-col><h3>{{ title }}</h3></v-col>
+          <v-col>
+            <Button @click="redirect(link)">
+              Open Tab
+              <i class="pi pi-eye"></i>
+            </Button>
+          </v-col>
+
+        </v-row>
+        
+        <!-- <Button as="router-link" :to="{name: link}" >
             Go To
             <i class="pi pi-eye"></i>
-          </Button>
-          <Button @click="redirect(link)">
-            Open Tab
-            <i class="pi pi-eye"></i>
-          </Button>
+          </Button> -->
+          
       </template>
     </Card>  
 </template>
