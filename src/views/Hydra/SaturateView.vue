@@ -14,16 +14,36 @@ onMounted(() => {
 
   var hydra = new Hydra({canvas: input.value, detectAudio:true, makeGlobal: true}).synth
 
+  a.setBins(5) // amount of bins (bands) to separate the audio spectrum
+
+  // noise(2)
+  //   .modulate(o1,()=>a.fft[1]*.5) // listening to the 2nd band
+  //   .out(o1)
+  var soundSize = ()=>a.fft[1]*.5
+
+  a.setSmooth(.8) // audio reactivity smoothness from 0 to 1, uses linear interpolation
+  a.setScale(8)    // loudness upper limit (maps to 0)
+  a.setCutoff(0.1)   // loudness from which to start listening to (maps to 0)
+
+  // a.show() // show what hydra's listening to
+  a.hide()
+
   hydra.osc(3, 0.01, 0.4)
     .color(1.2,1.2,1.3)
     .saturate(0.4)
     .modulateRepeat(osc(2),1, 2, 4, 3)
+    // .modulateRepeat(osc(()=>a.fft[1]),1, 2, 4, 3)
     .modulateKaleid(osc(12,0.05,0),1)
     .luma (0.4)
     .rotate(4, 0.1,0)
-    .modulate(o0, () => mouse.y *0.0002 )
+    // .modulate(o0, () => mouse.y *0.0002 )
+    // .modulate(o0, ()=>a.fft[1]*.5 )
     .scale(1).diff(o1)
     .out(o0)
+
+  
+
+  render(o0)
 })
 
 </script>

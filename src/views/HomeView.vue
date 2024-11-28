@@ -1,5 +1,5 @@
 <script setup>
-import { computed, watch, ref } from 'vue'
+import { computed, watch, ref, onMounted } from 'vue'
 import HomeCard from '../components/HomeCard.vue'
 import manualStore from '../store/manualStore'
 import { useRouter } from 'vue-router'
@@ -8,13 +8,23 @@ const router = useRouter()
 
 var cards = router.options.routes.filter((route) => route.hydra)
 
-var color = ""
-var text = ""
+const color = ref("")
+const text = ref("")
+const reactSound = ref(true)
+const slider = ref(0)
+var max = 100
+var min = 0
 
-let storeValue = manualStore.getStore()
-color = ref(storeValue.colorMapping)
-text = ref(storeValue.textMapping)
+onMounted(() => {
 
+  let storeValue = manualStore.getStore()
+  console.log(storeValue)
+  color.value = storeValue.colorMapping
+  text.value = storeValue.textMapping
+  reactSound.value = storeValue.reactSoundMapping
+  slider.value = storeValue.amplitudeMapping
+
+})
 
 </script>
 
@@ -42,8 +52,20 @@ text = ref(storeValue.textMapping)
               <v-col cols="1"></v-col>
               <v-col cols="3"><ColorPicker v-model="color"/></v-col>
             </v-row>
+            <v-divider class="my-5"/>
+            <v-row justify="center" align="center">
+              <v-col cols="12"> Réagit au son : <input type="checkbox" v-model="reactSound"/></v-col>
+            </v-row>           
+            <v-row justify="center" align="center">
+              <v-col cols="6">
+                <v-text-field v-model="slider" label="Amplitude"></v-text-field>
+              </v-col>
+              <v-col cols="6">
+                <Slider v-model="slider" :min="min" :max="max"/>
+              </v-col>              
+            </v-row>
             <br>
-            <Button label="OK" @click="manualStore.setStore(color, text)"></Button>
+            <Button label="OK" @click="manualStore.setStore(color, text, slider, reactSound)"></Button>
           </v-col>        
         </v-row>      
       </v-form>

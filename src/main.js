@@ -10,8 +10,7 @@ import Aura from '@primevue/themes/aura';
 import ColorPicker from 'primevue/colorpicker';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
-import Galleria from 'primevue/galleria';
-
+import Slider from 'primevue/slider';
 
 
 const app = createApp(App)
@@ -27,7 +26,7 @@ app.use(PrimeVue, {
 app.component('ColorPicker', ColorPicker);
 app.component('Card', Card);
 app.component('Button', Button);
-app.component('Galleria', Galleria);
+app.component('Slider', Slider);
 
 
 app.mount('#app')
