@@ -13,7 +13,7 @@ body {
   padding: 0;
   height: auto !important;
   width: 100%;
-  /* overflow: hidden !important; */
+  overflow: visible !important;
 }
 
 

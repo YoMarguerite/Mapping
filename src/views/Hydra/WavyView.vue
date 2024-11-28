@@ -30,7 +30,7 @@ onMounted(() => {
       <TresPerspectiveCamera :position="[1, -1, 1]" />
       <OrbitControls />
       <Suspense>
-        <!-- <Text></Text>       -->
+        <Text></Text>      
       </Suspense>
     </TresCanvas>
   </div>  

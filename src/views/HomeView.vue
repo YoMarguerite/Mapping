@@ -19,7 +19,7 @@ text = ref(storeValue.textMapping)
 </script>
 
 <template>
-  <div>
+  <div class="pl-6">
     <div class="justify-center text-center flex-column mb-5">
       <h1>Hello les potos de RABABOOM !</h1>
         <br>
@@ -27,7 +27,7 @@ text = ref(storeValue.textMapping)
         Voici une proposition de mapping à projeter
       </p>
       <p>
-        Dîtes mois si ça vous plaît ou si vous avez d'autres idées
+        Dîtes moi si ça vous plaît ou si vous avez d'autres idées
       </p>
       <p>
         Tout est modifiable suffit de me demander !
