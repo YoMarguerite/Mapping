@@ -13,9 +13,9 @@ onMounted(() => {
   input.value
 
   var hydra = new Hydra({canvas: input.value, detectAudio:true, makeGlobal: true}).synth
-
-  ​hydra.osc(20, 0.1, 0).color(0, 1, 2).rotate(1.57/2).out(o1)
-  hydra.osc(30, 0.01, 0).color(2, 0.7, 1).modulate(o1, 0).add(o1,1).modulatePixelate(o1,1,10).out(o0)
+  
+  hydra.osc(20, 0.1, 0).color(0, 1, 2).rotate(1.57/2).out(o1)
+  hydra.osc(30, 0.01, 0).color(2, 0.7, 1).modulate(o1, 0).add(o1,1).modulatePixelate(o1,1,10).out()
 
 })
 
@@ -30,7 +30,7 @@ onMounted(() => {
       <TresPerspectiveCamera :position="[1, -1, 1]" />
       <OrbitControls />
       <Suspense>
-        <Text></Text>      
+        <!-- <Text></Text>       -->
       </Suspense>
     </TresCanvas>
   </div>  

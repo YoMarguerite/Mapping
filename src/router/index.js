@@ -30,7 +30,7 @@ import TheWallView from '../views/Hydra/TheWallView.vue'
 import TrainWindowView from '../views/Hydra/TrainWindowView.vue'
 import TrampoView from '../views/Hydra/TrampoView.vue'
 import VoronoiView from '../views/Hydra/VoronoiView.vue'
-// import WavyView from '../views/Hydra/WavyView.vue'
+import WavyView from '../views/Hydra/WavyView.vue'
 import WindStreamView from '../views/Hydra/WindStreamView.vue'
 
 
@@ -68,7 +68,7 @@ const routes = [
   { path: '/trainwindow', name:'trainwindow', component: TrainWindowView, title: 'TrainWindow', hydra: true },
   { path: '/trampo', name:'trampo', component: TrampoView, title: 'Trampo', hydra: true },
   { path: '/voronoi', name:'voronoi', component: VoronoiView, title: 'Voronoi', hydra: true },
-  // { path: '/wavy', name:'wavy', component: WavyView, title: 'Wavy', hydra: true },
+  { path: '/wavy', name:'wavy', component: WavyView, title: 'Wavy', hydra: true },
   { path: '/windstream', name:'windstream', component: WindStreamView, title: 'WindStream', hydra: true },
 
 ]
