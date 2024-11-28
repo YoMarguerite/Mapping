@@ -20,14 +20,14 @@
             amplitude = event.newValue / 100
 
         if(event.key == "reactSoundMapping")
-            reactSound = event.newValue
+            reactSound = event.newValue == "true"
     });
 
     let storeValue = manualStore.getStore()
     color.value = storeValue.colorMapping
     text.value = storeValue.textMapping
-    amplitude = storeValue.amplitude / 100
-    reactSound = storeValue.reactSound
+    amplitude = storeValue.amplitudeMapping / 100
+    reactSound = storeValue.reactSoundMapping == "true"
 
     const matcapTexture = await useTexture([
         './texture.png',
@@ -36,7 +36,7 @@
     var textDisplay = computed(() => text)
 
     var size = ref(1)
-    console.log(a.vol)
+    
     setInterval(()=>{
         if(reactSound){
             let ampl = isNaN(amplitude) ? 0 : amplitude
