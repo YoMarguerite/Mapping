@@ -10,7 +10,8 @@ const canvas = useTemplateRef('canvas')
 
 
 onMounted(() => {
-  input.value
+  input.value.width = window.innerWidth;    
+  input.value.height = window.innerHeight;
 
   var hydra = new Hydra({canvas: input.value, detectAudio:true, makeGlobal: true}).synth
 
