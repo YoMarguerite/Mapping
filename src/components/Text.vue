@@ -44,7 +44,7 @@
         }else{
             size.value = 1
         }        
-    })
+    }, 10)
 
 </script>
 

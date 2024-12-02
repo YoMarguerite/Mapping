@@ -15,16 +15,21 @@ const slider = ref(0)
 var max = 100
 var min = 0
 
-onMounted(() => {
+const storeValue = manualStore.getStore()
 
-  let storeValue = manualStore.getStore()
-  console.log(storeValue)
-  color.value = storeValue.colorMapping
-  text.value = storeValue.textMapping
-  reactSound.value = storeValue.reactSoundMapping
-  slider.value = storeValue.amplitudeMapping
+color.value = storeValue.colorMapping
+text.value = storeValue.textMapping
+reactSound.value = storeValue.reactSoundMapping
+slider.value = storeValue.amplitudeMapping
 
-})
+const updateStore = function(){
+  storeValue.colorMapping = color.value
+  storeValue.textMapping = text.value
+  storeValue.reactSoundMapping = reactSound.value
+  storeValue.amplitudeMapping = slider.value
+
+  manualStore.setStore(storeValue)
+}
 
 </script>
 
@@ -65,7 +70,7 @@ onMounted(() => {
               </v-col>              
             </v-row>
             <br>
-            <Button label="OK" @click="manualStore.setStore(color, text, slider, reactSound)"></Button>
+            <Button label="OK" @click="updateStore()"></Button>
           </v-col>        
         </v-row>      
       </v-form>
